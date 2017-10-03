@@ -6,8 +6,6 @@ class stack
 public:
 	stack();
 	size_t count() const;
-	size_t array_size() const;
-	T * operator[](unsigned int index) const;
 	void push(T const &);
 	T pop();
 	T last()const;
@@ -26,19 +24,9 @@ stack<T>::stack()
 	count_ = 0;
 }
 template <typename T>
-size_t stack<T>::array_size() const
-{
-	return array_size_;
-}
-template <typename T>
 size_t stack<T>::count() const
 {
 	return count_;
-}
-template <typename T>
-T * stack<T>::operator[](unsigned int index) const
-{
-	return array_[index];
 }
 template <typename T>
 void stack<T>::push(T const & value)
