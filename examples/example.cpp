@@ -1,27 +1,51 @@
-#include <codecvt>
-#include <iostream>
-
-#include "palindrome.hpp"
-
-auto utf8string_towstring(std::string const & input) -> std::wstring
-{
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    return converter.from_bytes( input.c_str() );
-}
+#include "stack.h"
+#include <stdlib.h>
+#include <string>
 
 int main()
 {
-    for( std::string string; std::getline( std::cin, string ); ) {
-        
-        for( size_t i = 0; i < string.size(); ++i ) {
-            std::cout << std::bitset<sizeof(char) * 8>( string[ i ] ) << std::endl;
-        }
-        
-        if( palindrome( utf8string_towstring(string), std::locale("ru_RU.UTF-8") ) ) {
-            std::cout << "1\n";
-        }
-        else {
-            std::cout << "0\n";
-        }
-    }
+	stack<int> Stack;
+	std::string str;
+	unsigned int i = 0;
+
+	std::cout << "Add an element: +<Element>\nShow the last element: ?\nPop the last element: -\nShow the stack: =\n\n";
+	std::getline(std::cin, str);
+
+	while (str[i] != '\0')
+	{
+		switch (str[i])
+		{
+		case '+':
+		{
+					if (str[i + 1] == ' ' || str[i + 1] == '\0')
+						std::cout << "An error has occurred while reading arguments\n";
+					else
+					{
+						Stack.push(stoi(str.substr(i + 1)));
+					}
+					break;
+		}
+		case '?':
+		{
+					std::cout << Stack.last();
+					std::cout << std::endl;
+					break;
+		}
+		case '-':
+		{
+					Stack.pop();
+					break;
+		}
+		case '=':
+		{
+					Stack.print();
+					break;
+		}
+		defoult: break;
+		}
+		i++;
+	}
+
+	system("pause");
+	return 0;
 }
