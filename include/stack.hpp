@@ -27,7 +27,7 @@ stack<T>::stack()
 template <typename T>
 stack<T>::~stack()
 {
-	delite[] array_;
+	delete[] array_;
 	array_size_ = count_ = 0;
 }
 template <typename T>
